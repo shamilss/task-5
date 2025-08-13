@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
         section.classList.add("animate");
     });
 
-
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -16,4 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.15 });
 
     sections.forEach(section => observer.observe(section));
-}); 
+
+    const backToTop = document.querySelector(".back-to-top");
+
+    backToTop.style.display = "none";
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    backToTop.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
